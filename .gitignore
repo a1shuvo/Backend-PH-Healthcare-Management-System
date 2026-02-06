@@ -5,3 +5,5 @@ build
 .env
 .env.*
 !.env.example
+
+/src/generated
