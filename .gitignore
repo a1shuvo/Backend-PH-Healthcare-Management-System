@@ -6,4 +6,4 @@ build
 .env.*
 !.env.example
 
-/generated/prisma
+src/generated/prisma
