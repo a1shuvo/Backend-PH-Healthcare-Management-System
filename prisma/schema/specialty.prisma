@@ -8,7 +8,7 @@ model Specialty {
   isDeleted   Boolean   @default(false)
   deletedAt   DateTime?
 
-  @@index([isDeleted], name: "idx_specialty_is_deleted")
+  @@index([isDeleted], name: "idx_specialty_isDeleted")
   @@index([title], name: "idx_specialty_title")
-  @@map("specialties")
+  @@map("specialty")
 }
