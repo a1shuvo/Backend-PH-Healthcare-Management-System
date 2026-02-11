@@ -1,7 +1,7 @@
 model Doctor {
     id                  String            @id @default(uuid(7))
-    name                String            @db.VarChar(255)
-    email               String            @unique @db.VarChar(255)
+    name                String            @db.VarChar(50)
+    email               String            @unique @db.VarChar(100)
     profilePhoto        String?
     contactNumber       String?           @db.VarChar(20)
     address             String?           @db.Text
