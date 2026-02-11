@@ -55,7 +55,7 @@ export const auth = betterAuth({
       enabled: true,
       // Takes seconds instead of miliseconds
       maxAge:
-        ms(envVars.BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN as StringValue) / 60,
+        ms(envVars.BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE as StringValue) / 60,
     },
   },
 
