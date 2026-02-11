@@ -11,7 +11,7 @@ model Specialty {
 
   @@index([isDeleted], name: "idx_specialty_isDeleted")
   @@index([title], name: "idx_specialty_title")
-  @@map("specialty")
+  @@map("specialties")
 }
 
 model DoctorSpecialty {
@@ -26,5 +26,5 @@ model DoctorSpecialty {
   @@unique([doctorId, specialtyId])
   @@index([doctorId], name: "idx_doctor_specialty_doctorId")
   @@index([specialtyId], name: "idx_doctor_specialty_specialtyId")
-  @@map("doctor_specialty")
+  @@map("doctor_specialties")
 }

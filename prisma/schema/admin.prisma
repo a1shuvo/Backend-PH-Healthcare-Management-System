@@ -15,5 +15,5 @@ model Admin {
 
     @@index([email])
     @@index([isDeleted])
-    @@map("admin")
+    @@map("admins")
 }
