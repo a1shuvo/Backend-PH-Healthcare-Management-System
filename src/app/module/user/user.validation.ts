@@ -48,7 +48,7 @@ export const createDoctorZodSchema = z.object({
       .max(50, "Designation must be at most 50 characters"),
   }),
   specialties: z
-    .array(z.uuid(), "Specialties must be an array of strings")
+    .array(z.uuid(), "Specialties must be an array of valid UUID")
     .min(1, "At least 1 specialty is required"),
 });
 
