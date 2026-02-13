@@ -1,6 +1,7 @@
 import status from "http-status";
 import { UserStatus } from "../../../generated/prisma/enums";
 import AppError from "../../errorHelplers/AppError";
+import { IRequestUser } from "../../interfaces/requestUser.interface";
 import { auth } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";
 import { tokenUtils } from "../../utils/token";
@@ -128,7 +129,40 @@ const loginUser = async (payload: IUserLoginPayload) => {
   };
 };
 
+const getMe = async (user: IRequestUser) => {
+  const isUserExists = await prisma.user.findUnique({
+    where: { id: user.userId },
+    include: {
+      patient: {
+        include: {
+          appoinments: true,
+          reviews: true,
+          prescriptions: true,
+          medicalReports: true,
+          patientHealthData: true,
+        },
+      },
+      doctor: {
+        include: {
+          specialties: true,
+          appoinments: true,
+          reviews: true,
+          prescriptions: true,
+        },
+      },
+      admin: true,
+    },
+  });
+
+  if (!isUserExists) {
+    throw new AppError(status.NOT_FOUND, "User not found!");
+  }
+
+  return isUserExists;
+};
+
 export const AuthService = {
   registerPatient,
   loginUser,
+  getMe,
 };
