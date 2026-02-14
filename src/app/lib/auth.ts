@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { bearer } from "better-auth/plugins";
 import ms, { StringValue } from "ms";
 import { Role, UserStatus } from "../../generated/prisma/enums";
 import { envVars } from "../config/env";
@@ -43,6 +44,8 @@ export const auth = betterAuth({
       },
     },
   },
+
+  plugins: [bearer()],
 
   session: {
     // Takes seconds instead of miliseconds
