@@ -1,9 +1,13 @@
 import status from "http-status";
+import { JwtPayload } from "jsonwebtoken";
+import ms, { StringValue } from "ms";
 import { UserStatus } from "../../../generated/prisma/enums";
+import { envVars } from "../../config/env";
 import AppError from "../../errorHelplers/AppError";
 import { IRequestUser } from "../../interfaces/requestUser.interface";
 import { auth } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";
+import { jwtUtils } from "../../utils/jwt";
 import { tokenUtils } from "../../utils/token";
 
 interface IRegisterPatientPayload {
@@ -161,8 +165,69 @@ const getMe = async (user: IRequestUser) => {
   return isUserExists;
 };
 
+const getNewToken = async (refreshToken: string, sessionToken: string) => {
+  const isSessionTokenExists = await prisma.session.findUnique({
+    where: { token: sessionToken },
+    include: { user: true },
+  });
+
+  if (!isSessionTokenExists) {
+    throw new AppError(status.UNAUTHORIZED, "Invalid session token!");
+  }
+
+  const verifiedRefreshToken = jwtUtils.verifyToken(
+    refreshToken,
+    envVars.REFRESH_TOKEN_SECRET,
+  );
+
+  if (!verifiedRefreshToken.success && verifiedRefreshToken.error) {
+    throw new AppError(status.UNAUTHORIZED, "Invalid refresh token!");
+  }
+
+  const data = verifiedRefreshToken.data as JwtPayload;
+
+  const newAccessToken = tokenUtils.getAccessToken({
+    userId: data.userId,
+    role: data.role,
+    name: data.name,
+    email: data.email,
+    status: data.status,
+    isDeleted: data.isDeleted,
+    emailVerified: data.emailVerified,
+  });
+
+  const newRefreshToken = tokenUtils.getRefreshToken({
+    userId: data.userId,
+    role: data.role,
+    name: data.name,
+    email: data.email,
+    status: data.status,
+    isDeleted: data.isDeleted,
+    emailVerified: data.emailVerified,
+  });
+
+  const { token } = await prisma.session.update({
+    where: { token: sessionToken },
+    data: {
+      token: sessionToken,
+      expiresAt: new Date(
+        Date.now() +
+          ms(envVars.BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN as StringValue),
+      ),
+      updatedAt: new Date(),
+    },
+  });
+
+  return {
+    accessToken: newAccessToken,
+    refreshToken: newRefreshToken,
+    sessionToken: token,
+  };
+};
+
 export const AuthService = {
   registerPatient,
   loginUser,
   getMe,
+  getNewToken,
 };

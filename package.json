@@ -22,7 +22,7 @@
   "type": "module",
   "dependencies": {
     "@prisma/adapter-pg": "^7.3.0",
-    "@prisma/client": "^7.3.0",
+    "@prisma/client": "^7.4.0",
     "better-auth": "^1.4.18",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
@@ -42,7 +42,7 @@
     "@types/node": "^25.2.1",
     "@types/pg": "^8.16.0",
     "eslint": "^9.39.2",
-    "prisma": "^7.3.0",
+    "prisma": "^7.4.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.54.0"
