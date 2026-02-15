@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Email Verification OTP</title>
+    <title><%= type === "reset" ? "Password Reset OTP" : "Email Verification OTP" %></title>
   </head>
 
   <body
@@ -14,13 +14,7 @@
       font-family: Arial, Helvetica, sans-serif;
     "
   >
-    <table
-      width="100%"
-      cellpadding="0"
-      cellspacing="0"
-      border="0"
-      style="background: #f4f6f8; padding: 20px 0"
-    >
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f4f6f8; padding: 20px 0">
       <tr>
         <td align="center">
           <!-- Main Container -->
@@ -41,7 +35,7 @@
             <tr>
               <td align="center" style="background: #4f46e5; padding: 25px">
                 <h1 style="color: #ffffff; margin: 0; font-size: 22px">
-                  Verify Your Email
+                  <%= type === "reset" ? "Reset Your Password" : "Verify Your Email" %>
                 </h1>
               </td>
             </tr>
@@ -52,8 +46,9 @@
                 <h2 style="margin-top: 0">Hello <%= name %>,</h2>
 
                 <p style="font-size: 15px; line-height: 1.6">
-                  Thank you for signing up. Please use the following One-Time
-                  Password (OTP) to verify your email address.
+                  <%= type === "reset"
+                    ? "We received a request to reset your password. Use the following OTP to proceed."
+                    : "Thank you for signing up. Please use the following OTP to verify your email address." %>
                 </p>
 
                 <!-- OTP Box -->
@@ -75,8 +70,7 @@
                 </div>
 
                 <p style="font-size: 14px; color: #555">
-                  This OTP will expire in <b>2 minutes</b>. Do not share it with
-                  anyone.
+                  This OTP will expire in <b>2 minutes</b>. Do not share it with anyone.
                 </p>
 
                 <p style="font-size: 14px; color: #555">
@@ -101,8 +95,7 @@
                   color: #888;
                 "
               >
-                © <%= new Date().getFullYear() %> PH - Healthcare management
-                system. All rights reserved.
+                © <%= new Date().getFullYear() %> PH - Healthcare management system. All rights reserved.
               </td>
             </tr>
           </table>
