@@ -5,6 +5,10 @@ import { AuthController } from "./auth.controller";
 
 const router = Router();
 
+router.get("/login/google", AuthController.googleLogin);
+router.get("/google/success", AuthController.googleLoginSuccess);
+router.get("/oauth/error", AuthController.handleOAuthError);
+
 router.get(
   "/me",
   checkAuth(Role.ADMIN, Role.DOCTOR, Role.PATIENT, Role.SUPER_ADMIN),
