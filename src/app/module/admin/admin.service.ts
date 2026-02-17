@@ -1,6 +1,7 @@
 import status from "http-status";
 import { UserStatus } from "../../../generated/prisma/enums";
 import AppError from "../../errorHelplers/AppError";
+import { IRequestUser } from "../../interfaces/requestUser.interface";
 import { prisma } from "../../lib/prisma";
 import { IUpdateAdminPlayload } from "./admin.interface";
 
@@ -46,7 +47,7 @@ const updateAdmin = async (id: string, playload: IUpdateAdminPlayload) => {
 };
 
 // Soft Delete: admin user by setting isDeleted to true and also delete the user session and account
-const deleteAdmin = async (id: string) => {
+const deleteAdmin = async (id: string, user: IRequestUser) => {
   // TODO: Validate who is deleting admin user.
   // Only super_admin can delete super_admin and admin user
   // admin can not delete super_admin user
@@ -56,7 +57,12 @@ const deleteAdmin = async (id: string) => {
   });
 
   if (!isAdminExist) {
-    throw new AppError(status.NOT_FOUND, "Admin not found!");
+    throw new AppError(status.NOT_FOUND, "Admin or Super Admin not found!");
+  }
+
+  // Prevent self delete
+  if (isAdminExist.id === user.userId) {
+    throw new AppError(status.BAD_REQUEST, "You can not delete yourself!");
   }
 
   const result = await prisma.$transaction(async (tx) => {
