@@ -90,6 +90,7 @@ export const auth = betterAuth({
               templateData: {
                 name: user.name,
                 otp,
+                type: "verify",
               },
             });
           }
