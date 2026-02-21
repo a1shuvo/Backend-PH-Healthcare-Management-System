@@ -4,6 +4,7 @@ import cors from "cors";
 import express, { Application, Request, Response } from "express";
 import status from "http-status";
 import path from "path";
+import qs from "qs";
 import { envVars } from "./app/config/env";
 import { auth } from "./app/lib/auth";
 import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
@@ -11,6 +12,7 @@ import { notFound } from "./app/middleware/notFound";
 import { IndexRoutes } from "./app/routes";
 
 const app: Application = express();
+app.set("query parser", (str: string) => qs.parse(str));
 
 // ejs view setup
 app.set("view engine", "ejs");
