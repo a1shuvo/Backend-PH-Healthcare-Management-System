@@ -19,7 +19,7 @@ model Doctor {
   updatedAt           DateTime          @updatedAt
   userId              String            @unique
   appointments        Appointment[]
-  doctorSchedules     DoctorSchedule[]
+  doctorSchedules     DoctorSchedules[]
   specialties         DoctorSpecialty[]
   user                User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   prescriptions       Prescription[]

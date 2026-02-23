@@ -5,12 +5,12 @@ model Schedule {
   endDateTime     DateTime
   startDateTime   DateTime
   appointments    Appointment[]
-  doctorSchedules DoctorSchedule[]
+  doctorSchedules DoctorSchedules[]
 
   @@map("schedules")
 }
 
-model DoctorSchedule {
+model DoctorSchedules {
   isBooked   Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
