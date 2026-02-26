@@ -133,7 +133,7 @@ const getMe = async (user: IRequestUser) => {
     include: {
       patient: {
         include: {
-          appoinments: true,
+          appointments: true,
           reviews: true,
           prescriptions: true,
           medicalReports: true,
@@ -143,7 +143,7 @@ const getMe = async (user: IRequestUser) => {
       doctor: {
         include: {
           specialties: true,
-          appoinments: true,
+          appointments: true,
           reviews: true,
           prescriptions: true,
         },

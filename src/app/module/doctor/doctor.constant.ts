@@ -36,7 +36,7 @@ export const doctorIncludeConfig: Partial<
       specialty: true,
     },
   },
-  appoinments: {
+  appointments: {
     include: {
       patient: true,
       doctor: true,
