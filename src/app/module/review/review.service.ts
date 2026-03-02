@@ -1,6 +1,6 @@
 import status from "http-status";
 import { PaymentStatus, Role } from "../../../generated/prisma/enums";
-import AppError from "../../errorHelplers/AppError";
+import AppError from "../../errorHelpers/AppError";
 import { IRequestUser } from "../../interfaces/requestUser.interface";
 import { prisma } from "../../lib/prisma";
 import { ICreateReviewPayload, IUpdateReviewPayload } from "./review.interface";

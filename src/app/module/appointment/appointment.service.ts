@@ -4,7 +4,7 @@ import { v7 as uuidv7 } from "uuid";
 import { PaymentStatus, Role } from "../../../generated/prisma/enums";
 import { envVars } from "../../config/env";
 import { stripe } from "../../config/stripe.config";
-import AppError from "../../errorHelplers/AppError";
+import AppError from "../../errorHelpers/AppError";
 import { IRequestUser } from "../../interfaces/requestUser.interface";
 import { prisma } from "../../lib/prisma";
 import { AppointmentStatus } from "./../../../generated/prisma/enums";

@@ -4,8 +4,8 @@ import { NextFunction, Request, Response } from "express";
 import status from "http-status";
 import { ZodError } from "zod";
 import { envVars } from "../config/env";
-import AppError from "../errorHelplers/AppError";
-import { handleZodError } from "../errorHelplers/handleZodError";
+import AppError from "../errorHelpers/AppError";
+import { handleZodError } from "../errorHelpers/handleZodError";
 import { TErrorResponse, TErrorSources } from "../interfaces/error.interface";
 import { deleteUploadedFilesFromGlobalErrorHandler } from "../utils/deleteUploadedFilesFromGlobalErrorHandler";
 

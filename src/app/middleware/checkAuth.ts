@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import status from "http-status";
 import { Role, UserStatus } from "../../generated/prisma/enums";
 import { envVars } from "../config/env";
-import AppError from "../errorHelplers/AppError";
+import AppError from "../errorHelpers/AppError";
 import { prisma } from "../lib/prisma";
 import { cookieUtils } from "../utils/cookie";
 import { jwtUtils } from "../utils/jwt";
