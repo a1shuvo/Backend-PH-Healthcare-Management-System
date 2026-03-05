@@ -3,7 +3,7 @@ import { JwtPayload } from "jsonwebtoken";
 import ms, { StringValue } from "ms";
 import { UserStatus } from "../../../generated/prisma/enums";
 import { envVars } from "../../config/env";
-import AppError from "../../errorHelplers/AppError";
+import AppError from "../../errorHelpers/AppError";
 import { IRequestUser } from "../../interfaces/requestUser.interface";
 import { auth } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";

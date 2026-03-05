@@ -1,6 +1,6 @@
 import "dotenv/config";
 import status from "http-status";
-import AppError from "../errorHelplers/AppError";
+import AppError from "../errorHelpers/AppError";
 
 interface EnvConfig {
   NODE_ENV: string;

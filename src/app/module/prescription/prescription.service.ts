@@ -6,7 +6,7 @@ import {
   uploadFileToCloudinary,
 } from "../../config/cloudinary.config";
 
-import AppError from "../../errorHelplers/AppError";
+import AppError from "../../errorHelpers/AppError";
 import { IRequestUser } from "../../interfaces/requestUser.interface";
 import { prisma } from "../../lib/prisma";
 import { sendEmail } from "../../utils/email";
